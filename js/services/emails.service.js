@@ -2,7 +2,15 @@ import { utilService } from '../services/util-service.js';
 // import { noteService } from '../services/note.service.js';
 
 const EMAIL_KEY = 'emails';
-const emailsDB = utilService.load(EMAIL_KEY) || _createSamplesEmails();
+const emailsStorage = utilService.loadFromStorage(EMAIL_KEY) || _createSamplesEmails();
+
+export default {
+  getEmails,
+};
+
+function getEmails() {
+  return Promise.resolve(emailsStorage);
+}
 
 function _createSamplesEmails() {
   const fromNames = ['Tomer', 'Mayan', 'Raffi', 'Tom', 'Michel', 'Guy', 'Shlomi', 'Ran', 'David', 'Jassy', 'Bryan', 'Shone', 'Jesus', 'Peter'];
