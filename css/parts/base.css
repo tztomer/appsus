@@ -1,0 +1,20 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+p {
+  margin: 0px;
+  padding-inline: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+}
+
+.container {
+  width: 100%;
+}
