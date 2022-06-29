@@ -10,7 +10,9 @@ export default {
 </section>
 `,
   data() {
-    return {};
+    return {
+      db: '',
+    };
   },
   created() {},
   methods: {},
