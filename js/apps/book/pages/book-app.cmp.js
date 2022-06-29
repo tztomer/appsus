@@ -1,7 +1,7 @@
-import { bookService } from "../services/book-service.js";
+import { bookService } from "../../../services/book-service.js";
 import bookList from "../cmps/book-list.cmp.js";
 import bookAdd from "../cmps/book-add.cmp.js";
-import bookDetails from "../views/book-details.cmp.js";
+import bookDetails from "../pages/book-details.cmp.js";
 import bookFilter from "../cmps/book-filter-cmp.js";
 
 

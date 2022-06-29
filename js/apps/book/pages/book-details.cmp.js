@@ -1,6 +1,6 @@
-import bookDesc from "../views/book-desc.js"
-import reviewAdd from "../views/review-add.js"
-import { bookService } from "../services/book-service.js";
+import bookDesc from "../cmps/book-desc.js"
+import reviewAdd from "../cmps/review-add.js"
+import { bookService } from "../../../services/book-service.js";
 
 export default {
     template: `
