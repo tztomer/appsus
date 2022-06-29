@@ -11,7 +11,7 @@ export default {
 `,
   data() {
     return {
-      db: '',
+      db: 'text',
     };
   },
   created() {},
