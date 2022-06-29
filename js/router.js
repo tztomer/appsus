@@ -4,6 +4,8 @@ import emailsList from '../js/apps/emails/pages/email-app.cmp.js';
 import aboutPage from '../js/pages/app-about.cmp.js'
 import keepApp from '../js/apps/keep/pages/note-index.cmp.js';
 import bookDetails from '../js/apps/book/pages/book-details.cmp.js';
+import noteDetails from '../js/apps/keep/pages/note-details.cmp.js';
+
 
 const routes = [
   {
@@ -26,6 +28,10 @@ const routes = [
     path: '/keep',
     component: keepApp,
   },
+  {
+    path: '/keep/:noteId',
+    component: noteDetails
+},
   {
     path: '/book/:bookId',
     component: bookDetails
