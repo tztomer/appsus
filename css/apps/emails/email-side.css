@@ -1,0 +1,13 @@
+section.emails-side-filters {
+  height: 100vh;
+  width: 15vw;
+}
+
+ul.side-filter {
+  list-style: none;
+  height: 33vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 35px;
+}

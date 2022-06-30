@@ -7,6 +7,7 @@ export const utilService = {
   createWord,
   getFormattedHour,
   getFormattedDate,
+  getFormattedDateShort,
 };
 let words = [];
 _populateWords();
@@ -71,9 +72,18 @@ function getFormattedHour(timestamp) {
   return timeStr;
 }
 
+function getFormattedDateShort(timestamp) {
+  const time = new Date(timestamp);
+  const prop = { month: 'long', day: 'numeric' };
+  return moment(time).format('D MMMM');
+  // time.format('D MMMM');
+  // return time.toLocaleDateString('en', prop);
+}
+
 function getFormattedDate(timestamp) {
   const time = new Date(timestamp);
   // Replacing '.' with '/'
+  var options = { month: 'long', day: 'numeric' };
   return time.toLocaleString().split(',')[0].replace(/\./g, '/');
 }
 

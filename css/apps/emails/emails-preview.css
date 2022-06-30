@@ -1,9 +1,29 @@
+section.emails-container {
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+  overflow: hidden;
+}
+main.emails-wrapper {
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+.email-row.msg-body.cell {
+  max-width: 600px;
+}
+
 .table {
   display: table;
+  height: 100vh;
+  /* display: table-caption; */
+  overflow-y: auto;
+  width: 100%;
 }
 
 .row {
   border-bottom: 1px solid black;
+  vertical-align: middle;
 }
 
 .preview {
@@ -13,6 +33,16 @@
 
 .cell {
   display: table-cell;
-  border-bottom: 1px solid gray;
-  max-width: 15%;
+  border-bottom: 1px solid #80808052;
+  max-width: 110px;
+  padding: 34px 10px;
+  vertical-align: middle;
+}
+
+span.email-row.date-row.cell {
+  text-align: end;
+}
+
+.email-preview .starred {
+  color: #f8cb4d;
 }
