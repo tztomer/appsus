@@ -5,17 +5,16 @@ import noteList from "..//cmps/note-list.cmp.js";
 
 export default {
     template: `
-      <div class = "screen" :class="{selectedNote:selectedNote}" @click="selectedNote = null"></div>
+      <div class="screen" :class="{selectedNoteId:selectedNoteId}" @click="selectedNoteId = null"></div>
     <section class="note-index">
         <note-add @noteAdded="addNote"/>
-        <note-details v-if="selectedNote" :book="selectedNote"/>
         <note-list :notes="notesForDisplay" @selected="onSelectNote"/>
     </section>
 `,
     data() {
         return {
             notes: null,
-            selectedNote: null,
+            selectedNoteId: null,
         };
     },
     created() {
@@ -24,11 +23,11 @@ export default {
      },
     methods: {
         addNote() {
-            bookService.query()
+            noteService.query()
                 .then(notes => this.notes = notes)
         },
-        onSelectNote(note) {
-            this.selectedNote = note
+        onSelectNote(noteId) {
+            this.selectedNote = noteId
         }
     },
     computed: {
@@ -36,7 +35,6 @@ export default {
             return this.notes
         }
     },
-    unmounted() { },
     components: {
         noteAdd,
         noteList,

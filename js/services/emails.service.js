@@ -6,10 +6,58 @@ const emailsStorage = utilService.loadFromStorage(EMAIL_KEY) || _createSamplesEm
 
 export default {
   getEmails,
+  toggleStar,
+  update,
+  createNewEmail,
+  getEmailById,
+  removeEmail,
+  updateEmail,
 };
 
 function getEmails() {
   return Promise.resolve(emailsStorage);
+}
+
+function getEmailById(emailId) {
+  const email = emailsStorage.find(email => email.id === emailId);
+  return Promise.resolve(email);
+}
+
+function removeEmail(emailId) {
+  const idx = emailsStorage.findIndex(email => email.id === emailId);
+  const fromName = emailsStorage[idx].from || '';
+  emailsStorage.splice(idx, 1);
+  utilService.saveToStorage(EMAIL_KEY, emailsStorage);
+  return Promise.resolve(fromName);
+}
+
+// Reuse func - for all updates. When need to return - promise
+function updateEmail(prop, val, emailId) {
+  const foundEmail = emailsStorage.find(email => email.id === emailId);
+  const emailIdx = emailsStorage.findIndex(email => email.id === emailId);
+
+  // Make a deep copy and splice for vue reactivation
+  const emailCopy = JSON.parse(JSON.stringify(foundEmail));
+  emailCopy[prop] = val;
+  emailsStorage.splice(emailIdx, 1, emailCopy);
+  utilService.saveToStorage(EMAIL_KEY, emailsStorage);
+  return Promise.resolve(emailsStorage);
+}
+
+function createNewEmail(emailInfo) {
+  const email = {
+    id: utilService.makeId(),
+    from: emailInfo.from,
+    subject: emailInfo.subject,
+    body: emailInfo.body,
+    isRead: false,
+    sentAt: Date.now(),
+    boxes: emailInfo.boxes,
+  };
+  emailsStorage.unshift(email);
+  utilService.saveToStorage(EMAIL_KEY, emailsStorage);
+
+  return Promise.resolve(email);
 }
 
 function _createSamplesEmails() {
@@ -35,4 +83,22 @@ function _createEmail(from = utilService.createWord(6)) {
       note: false,
     },
   };
+}
+
+function toggleStar(emailId) {
+  let emailIdx;
+  const email = emailsStorage.find((email, idx) => {
+    if (email.id === emailId) {
+      emailIdx = idx;
+      return email;
+    }
+  });
+  let emailCopy = JSON.parse(JSON.stringify(email));
+  emailCopy.boxes.star = !email.boxes.star;
+  emailsStorage.splice(emailIdx, 1, emailCopy);
+  utilService.saveToStorage(EMAIL_KEY, emailsStorage);
+}
+
+function update(email) {
+  return utilService.saveToStorage(EMAIL_KEY, email);
 }

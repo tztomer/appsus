@@ -30,7 +30,8 @@ const routes = [
   },
   {
     path: '/keep/:noteId',
-    component: noteDetails
+    component: noteDetails,
+    props: true,
 },
   {
     path: '/book/:bookId',

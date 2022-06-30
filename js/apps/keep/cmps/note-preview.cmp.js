@@ -5,7 +5,6 @@ export default {
         <img class="card-img" :src="noteImgUrl" alt="">
         <p class="note-text">{{noteText}}</p>
     </section>
-
 `,
     props: ["note"],
     computed: {

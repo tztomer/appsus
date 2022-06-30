@@ -9,18 +9,19 @@ function getTheNotes() {
 const notes = [
     {
         id: "n101",
-        type: "note-txt",
+        type: "txtNote",
         isPinned: true,
         info: {
+            title: "sometime in the future",
             txt: "Fullstack Me Baby!"
         }
     },
     {
         id: "n102",
-        type: "note-img",
+        type: "imgNote",
         info: {
-            url: "http://some-img/me",
-            title: "Bobi and Me"
+            url: "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_4:3/k%2Farchive%2F8cfbcbb2919742682345681d469b7417a73e4dfe",
+            title: "Yesterday's Pancake"
         },
         style: {
             backgroundColor: "#00d"
@@ -28,12 +29,21 @@ const notes = [
     },
     {
         id: "n103",
-        type: "note-todos",
+        type: "todosNote",
         info: {
             label: "Get my stuff together",
+            title: "Crazy Ideas",
             todos: [
-                { txt: "Driving liscence", doneAt: null },
-                { txt: "Coding power", doneAt: 187111111 }]
+                { 
+                    id: "ti101",
+                    txt: "Driving liscence",
+                    doneAt: null
+                },
+                { 
+                    id: "ti102",
+                    txt: "Coding power",
+                    doneAt: 187111111
+                }]
         }
     }
 ];

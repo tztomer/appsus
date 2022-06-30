@@ -1,17 +1,19 @@
 /* NOTE DETAILS */
 
-.note-details-modal{
+.note-details-modal {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     top: 50%;
     left: 5%;
-    transform: translate(0,-50%);
-    display: grid;
-    grid-template-columns: auto 1fr;
+    transform: translate(0, -50%);
     gap: 1em;
     padding: 24px;
     z-index: 100;
     width: 90%;
-    background-color: white;
+    background-color: #ffcfa4;
+    max-width: 400px;
+    /* align-items: center; */
 }
 
 .screen {
@@ -23,7 +25,11 @@
     height: 100%;
 }
 
-body .selectedBook.screen {
+.note-edit-form img {
+    width: 100%;
+}
+
+body .selectedNoteId.screen {
     background-color: #141414;
     pointer-events: auto;
     opacity: 0.7;
@@ -34,4 +40,35 @@ body .selectedBook.screen {
 .note-add {
     display: flex;
     justify-content: space-between;
+}
+
+/* NOTE LIST */
+
+.note-list {
+    column-count: 3;
+    column-gap: 1rem;
+}
+
+.note-preview-container:not(:first-of-type) {
+    margin: 1rem 0;
+    column-fill: balance;
+    break-inside: avoid-column;
+    height: fit-content;
+    background-color: lightblue;
+    border: 1px solid black;
+}
+
+.note-preview-container:first-of-type {
+    break-inside: avoid-column;
+    height: fit-content;
+    background-color: lightblue;
+    border: 1px solid black;
+}
+
+.img-note img {
+    width: 100%;
+}
+
+h3 {
+    text-align: center;
 }
