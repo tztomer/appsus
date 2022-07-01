@@ -1,9 +1,8 @@
-import { bookService } from "../../../services/book-service.js";
+import { bookService } from '../../../services/book-service.js';
 import { eventBus } from '../../../services/eventBus-service.js';
 
-
 export default {
-    template: `
+  template: `
     <section class="book-add">
         <section class="search-input">
             <span>Add a book: </span>
@@ -20,27 +19,25 @@ export default {
         </section>
     </section>
 `,
-    data() {
-        return {
-            results: null,
-            userInput: null,
-        };
+  data() {
+    return {
+      results: null,
+      userInput: null,
+    };
+  },
+  methods: {
+    onSearchBook() {
+      bookService.getResultsFromGoogle(this.userInput).then(searchResults => {
+        console.log('searchResults', searchResults);
+        this.results = searchResults;
+      });
     },
-    methods: {
-        onSearchBook() {
-            bookService.getResultsFromGoogle(this.userInput)
-                .then(searchResults => {
-                    console.log('searchResults', searchResults)
-                    this.results = searchResults
-                })
-        },
-        onAddBook(result) {
-            if (!result.description) result.description = 'N/A'
-            bookService.addBook(result)
-                .then(book => {
-                    this.$emit('bookAdded', book)
-                    eventBus.emit('show-msg', { txt: 'book added' })
-                })
-        }
+    onAddBook(result) {
+      if (!result.description) result.description = 'N/A';
+      bookService.addBook(result).then(book => {
+        this.$emit('bookAdded', book);
+        eventBus.$emit('show-msg', { txt: 'book added' });
+      });
     },
+  },
 };

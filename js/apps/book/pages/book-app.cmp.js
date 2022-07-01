@@ -6,6 +6,7 @@ import bookFilter from "../cmps/book-filter-cmp.js";
 
 
 export default {
+    name: 'bookApp',
     template: `
     <section class="book-app">
         <h1>Books:</h1>

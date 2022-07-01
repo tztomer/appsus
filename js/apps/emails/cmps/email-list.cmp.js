@@ -1,16 +1,15 @@
-import emailPreview from './email-preview.cmp.js';
+import emailPreview from '../cmps/email-preview.cmp.js';
+import emailExtended from '../cmps/email-extended.cmp.js';
 
 export default {
   props: ['emails'],
   template: `
-
-
-<section class="email-list">
+    <section class="email-list">
         <div v-for="email in emails" class="email-previews">
             <email-preview
             :email="email" 
             :key="email.id"
-            @click="selectEmail(email.id, email.isRead)">
+            @click.native="selectEmail(email.id, email.isRead)">
             </email-preview>
 
             <email-extended
@@ -20,10 +19,7 @@ export default {
             </email-extended>
         </div>
     </section>
-      
- 
-
-`,
+    `,
   data() {
     return {
       selectedEmailId: null,
@@ -66,9 +62,8 @@ export default {
       }
     },
   },
-  computed: {},
-  unmounted() {},
   components: {
     emailPreview,
+    emailExtended,
   },
 };

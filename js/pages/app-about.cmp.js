@@ -1,7 +1,7 @@
-import { eventBus } from "../services/eventBus-service.js";
+import { eventBus } from '../services/eventBus-service.js';
 
 export default {
-    template: `
+  template: `
         <section class="app-main">
             <div class="about-page">
                 <h3>About Appsus</h3>
@@ -12,10 +12,10 @@ export default {
             <button @click="callBus">Call the Bus</button>
         </section>
 `,
-    methods: {
-        callBus() {
-            console.log('calling the bus');
-            eventBus.emit('show-msg', 'hi')
-        }
+  methods: {
+    callBus() {
+      console.log('calling the bus');
+      eventBus.$emit('show-msg', 'hi');
     },
+  },
 };

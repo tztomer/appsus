@@ -1,8 +1,8 @@
-import { bookService } from "../../../services/book-service.js";
+import { bookService } from '../../../services/book-service.js';
 import { eventBus } from '../../../services/eventBus-service.js';
 
 export default {
-    template: `
+  template: `
  <section class="reviews">
     <h2>Reviews</h2>
     <form @submit.prevent="add">
@@ -51,45 +51,42 @@ export default {
     </ul>
 </section>
 `,
-    data() {
-        return {
-            book: null,
-            review: {
-                name: 'Books Reader',
-                rating: 1,
-                readingDate: null,
-                thoughts: ''
-            }
-        };
+  data() {
+    return {
+      book: null,
+      review: {
+        name: 'Books Reader',
+        rating: 1,
+        readingDate: null,
+        thoughts: '',
+      },
+    };
+  },
+  computed: {
+    getToday() {
+      const today = new Date();
+      const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+      return date;
     },
-    computed: {
-        getToday() {
-            const today = new Date();
-            const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-            return date
-        }
+  },
+  mounted() {
+    this.$refs.input.focus();
+  },
+  methods: {
+    add() {
+      bookService.addReview(this.book.id, this.review).then(book => {
+        this.book = book;
+        this.review = bookService.getEmptyReview();
+        eventBus.$emit('show-msg', { txt: `A review on ${this.book.id} was added` });
+      });
     },
-    mounted() {
-        this.$refs.input.focus()
+    remove(reviewId) {
+      bookService.removeReview(this.book.id, reviewId).then(book => (this.book = book));
+      eventBus.$emit('show-msg', { txt: 'review removed' });
     },
-    methods: {
-        add() {
-            bookService.addReview(this.book.id, this.review)
-                .then(book => {
-                    this.book = book;
-                    this.review = bookService.getEmptyReview()
-                    eventBus.emit('show-msg', {txt: `A review on ${this.book.id} was added`})
-                })
-        },
-        remove(reviewId) {
-            bookService.removeReview(this.book.id, reviewId)
-                .then(book => this.book =  book);
-                eventBus.emit('show-msg', {txt: 'review removed'})
-        }
-    },
-    created() {
-        const {bookId} = this.$route.params
-        bookService.get(bookId)
-            .then(book => this.book = book)
-    }
+  },
+  created() {
+    const { bookId } = this.$route.params;
+    bookService.get(bookId).then(book => (this.book = book));
+  },
 };

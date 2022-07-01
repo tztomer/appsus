@@ -1,11 +1,12 @@
 import bookApp from '../js/apps/book/pages/book-app.cmp.js';
 import homePage from '../js/pages/app-home.cmp.js';
-import emailsList from '../js/apps/emails/pages/email-app.cmp.js';
-import aboutPage from '../js/pages/app-about.cmp.js'
+// import emailsList from '../js/apps/emails/pages/email-app.cmp.js';
+import noteDetails from '../js/apps/keep/pages/note-details.cmp.js';
+import aboutPage from '../js/pages/app-about.cmp.js';
 import keepApp from '../js/apps/keep/pages/note-index.cmp.js';
 import bookDetails from '../js/apps/book/pages/book-details.cmp.js';
-import noteDetails from '../js/apps/keep/pages/note-details.cmp.js';
-
+import emailApp from '../js/apps/emails/pages/email-app.cmp.js';
+import emailDetails from '../js/apps/emails/pages/email-details.cmp.js';
 
 const routes = [
   {
@@ -14,16 +15,16 @@ const routes = [
   },
   {
     path: '/about',
-    component: aboutPage
+    component: aboutPage,
   },
   {
     path: '/book',
     component: bookApp,
   },
-  {
-    path: '/emails',
-    component: emailsList,
-  },
+  { path: '/email:filter?', component: emailApp },
+  { path: '/email/:emailId', component: emailDetails },
+  { path: '/email/reply/:emailId', component: emailApp },
+
   {
     path: '/keep',
     component: keepApp,
@@ -36,8 +37,13 @@ const routes = [
     ]
   },
   {
+    path: '/keep/:noteId',
+    component: noteDetails,
+    props: true,
+  },
+  {
     path: '/book/:bookId',
-    component: bookDetails
+    component: bookDetails,
   },
 ];
 
