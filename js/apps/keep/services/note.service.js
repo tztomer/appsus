@@ -9,7 +9,7 @@ _createNotes()
 export const noteService = {
     query,
     get,
-    addNote,
+    saveNote,
 }
 
 
@@ -22,9 +22,11 @@ function get(noteId) {
     return storageService.get(NOTES_KEY, noteId)
 }
 
-function addNote(note) {
-    return storageService.post(NOTES_KEY, note)
+function saveNote(note) {
+    if (note.id) return storageService.put(NOTES_KEY, note)
+    else return storageService.post(NOTES_KEY, note)
 }
+
 
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTES_KEY)

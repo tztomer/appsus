@@ -27,12 +27,14 @@ const routes = [
   {
     path: '/keep',
     component: keepApp,
+    children: [
+      {
+        path: ':noteId',
+        component: noteDetails,
+        props: true
+      }
+    ]
   },
-  {
-    path: '/keep/:noteId',
-    component: noteDetails,
-    props: true,
-},
   {
     path: '/book/:bookId',
     component: bookDetails
