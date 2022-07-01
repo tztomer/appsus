@@ -7,7 +7,7 @@ export default {
     </span>
         Email
         </router-link>
-        <router-link to="/note" @click.native="$emit('clicked')" class="nav-link">
+        <router-link to="/keep" @click.native="$emit('clicked')" class="nav-link">
         <span class="note-icon-container"><i class="note-icon fas fa-lightbulb"></i></span>
         Keep
         </router-link>
