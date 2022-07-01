@@ -1,5 +1,5 @@
 export default {
-    template: `
+  template: `
           <section>
             <h3>{{noteInfo.title}}</h3>
             <p>
@@ -7,5 +7,5 @@ export default {
             </p>
           </section>
           `,
-    props: ['noteInfo'],
-  }
+  props: ['noteInfo'],
+}

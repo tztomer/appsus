@@ -1,24 +1,34 @@
 import { noteService } from "../services/note.service.js";
+import { utilService } from '../../../services/util-service.js';
+
+// :action="formSubmit"
+// @blur="formSubmit"
+//  <button @click="onRemoveTodo">X</button>
+// @change="saveNote"
+//        saveNote() {
+//    this.$emit('note', this.note) }
 
 export default {
     template: `
     <section class="note-details-modal">
-        <p>note details</p>
-        <pre>{{note}}</pre>
-        <form class="note-edit-form" :action="formSubmit">
-            <input v-if="note" type="text" v-model="note.info.title" placeholder="title" style="width: 300px;" />
-            <textarea v-if="noteTypeTxt" name="note-text-edit" cols="30" rows="10" v-model="note.info.txt"></textarea>
-            <img v-if="noteTypeImg" :src="note.info.url" alt="">
-            <section v-if="noteTypeTodos" class="todo-list" >
-                <div class="todo-item" v-for="todo in note.info.todos">
-                    <input type="text" class="todo-text" v-model="todo.txt"/>
-                    <button @click="onRemoveTodo(todo.id)">X</button>
-                </div>
-            </section>
-            <section v-if="noteTypeImg" class="url-edit">
-                <textarea cols="30" rows="6" v-model="note.info.url"></textarea>
-            </section>
-        </form>
+    <!-- <pre>{{note}}</pre> -->
+        <div contenteditable="true" v-if="note" class="title-box" style="width: 300px;" @input="event => onTitleInput(event)">{{note.info.title}}</div>
+        <div contenteditable="true" v-if="noteTypeTxt" class="text-box" @input="event => onTextInput(event)" @keyup.enter="event => onAddNewLine(event)">{{note.info.txt}}</div>
+        <img v-if="noteTypeImg" :src="note.info.url" class="note-details-img" alt="">
+        <section v-if="noteTypeTodos" class="todo-list" >
+            <div class="todo-item" v-for="(todo, index) in note.info.todos">
+                <div contenteditable="true" class="todo-text" @input="event => onTodoInput(event, index)">{{todo.txt}}</div>
+            </div>
+            <div class="todo-item">
+                <div contenteditable="true" class="last-todo-text"  @keyup.enter="event => onTodoInput(event, index)" @blur="event => onTodoInput(event, index)"></div>
+            </div>
+        </section>
+        <section v-if="noteTypeImg" class="noteImgExplanation">
+            <span>Enter/change image URL:</span> <a target="_blank" href="https://www.wikihow.com/Get-the-URL-for-Pictures">How?</a>
+        </section>
+        <section v-if="noteTypeImg" class="url-edit">
+            <div contenteditable="true" class="img-text" @input="event => onUrlInput(event)">{{note.info.url}}</div>
+        </section>
     </section>
 `,
     props: ['noteId'],
@@ -27,12 +37,14 @@ export default {
             note: null,
             noteTypeTxt: null,
             noteTypeImg: null,
-            noteTypeTodos: null
+            noteTypeTodos: null,
+            noteTitle: null,
         };
     },
     created() {
-        console.log(this.noteId);
-        noteService.get(this.noteId)
+        const noteId = this.noteId
+        console.log('noteId', noteId)
+        noteService.get(noteId)
             .then(note => {
                 console.log('note', note)
                 const noteType = note.type
@@ -48,6 +60,45 @@ export default {
         },
         onRemoveTodo(todoId) {
             console.log('todoId', todoId)
-        }
-    }
+        },
+        blurClicked() {
+            console.log('blur clicked!');
+        },
+        onTitleInput(event) {
+            const value = event.target.innerText
+            this.note.info.title = value
+            this.$emit('note', this.note)
+        },
+        onTextInput(event) {
+            const value = event.target.innerText
+            this.note.info.txt = value
+            this.$emit('note', this.note)
+        },
+        onTodoInput(event, index) {
+            console.log('index', index)
+            const value = event.target.innerText
+            if (!index) {
+                if (!value) return
+                this.note.info.todos.push({
+                    id: utilService.makeId(),
+                    txt: value,
+                    doneAt: null
+                })
+                event.target.innerText = ''
+            } else {
+                this.note.info.todos[index].txt = value
+            }
+            this.$emit('note', this.note)
+        },
+        onUrlInput(event) {
+            const value = event.target.innerText
+            this.note.info.url = value
+            this.$emit('note', this.note)
+        },
+        onAddNewLine(event) {
+            const value = event.target.innerText
+            this.note.info.text = value + '\n'
+            this.$emit('note', this.note)
+        },
+    },
 };

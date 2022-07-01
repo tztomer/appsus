@@ -4,8 +4,10 @@ import noteDetails from "../pages/note-details.cmp.js";
 import noteList from "..//cmps/note-list.cmp.js";
 
 export default {
+    name: 'noteIndexCmp',
     template: `
-      <div class="screen" :class="{selectedNoteId:selectedNoteId}" @click="selectedNoteId = null"></div>
+      <div class="screen" :class="{selectedNoteId:selectedNoteId}" @click="onSaveNote"></div>
+      <note-details v-if="selectedNoteId" @note="putNoteInData" :noteId="selectedNoteId"/>
     <section class="note-index">
         <note-add @noteAdded="addNote"/>
         <note-list :notes="notesForDisplay" @selected="onSelectNote"/>
@@ -15,19 +17,41 @@ export default {
         return {
             notes: null,
             selectedNoteId: null,
+            note: null
         };
     },
     created() {
         noteService.query()
             .then(notes => this.notes = notes)
-     },
+    },
     methods: {
         addNote() {
             noteService.query()
                 .then(notes => this.notes = notes)
         },
         onSelectNote(noteId) {
-            this.selectedNote = noteId
+            console.log('note selected!!', noteId)
+            
+            this.selectedNoteId = noteId
+        },
+        onSaveNote() {
+            console.log('this.note', this.note)
+            if (!this.note) {
+                this.$router.push('/keep')
+                this.selectedNoteId = null
+            } else {
+                noteService.saveNote(this.note)
+                    .then(note => {
+                        this.selectedNoteId = null
+                        this.$router.push('/keep')
+                        console.log('note', note)
+                        noteService.query()
+                            .then(notes => this.notes = notes)
+                    })
+            }
+        },
+        putNoteInData(note) {
+            this.note = note
         }
     },
     computed: {

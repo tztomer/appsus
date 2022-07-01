@@ -28,6 +28,13 @@ const routes = [
   {
     path: '/keep',
     component: keepApp,
+    children: [
+      {
+        path: ':noteId',
+        component: noteDetails,
+        props: true
+      }
+    ]
   },
   {
     path: '/keep/:noteId',
