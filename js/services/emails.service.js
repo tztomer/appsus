@@ -1,47 +1,89 @@
 import { utilService } from '../services/util-service.js';
-// import { noteService } from '../services/note.service.js';
+import { storageService } from '../services/async-storage-service.js';
 
 const EMAIL_KEY = 'emails';
-const emailsStorage = utilService.loadFromStorage(EMAIL_KEY) || _createSamplesEmails();
+const emailsDB = utilService.loadFromStorage(EMAIL_KEY) || _createSamplesEmails();
 
-export default {
+export const emailService = {
   getEmails,
-  toggleStar,
-  update,
+  updateEmail,
   createNewEmail,
   getEmailById,
+  sendToNotes,
   removeEmail,
-  updateEmail,
+  toggleStar,
 };
 
 function getEmails() {
-  return Promise.resolve(emailsStorage);
+  return storageService.query(EMAIL_KEY);
+  // return Promise.resolve(emailsDB);
 }
 
 function getEmailById(emailId) {
-  const email = emailsStorage.find(email => email.id === emailId);
+  const email = emailsDB.find(email => email.id === emailId);
   return Promise.resolve(email);
 }
 
 function removeEmail(emailId) {
-  const idx = emailsStorage.findIndex(email => email.id === emailId);
-  const fromName = emailsStorage[idx].from || '';
-  emailsStorage.splice(idx, 1);
-  utilService.saveToStorage(EMAIL_KEY, emailsStorage);
+  const idx = emailsDB.findIndex(email => email.id === emailId);
+  const fromName = emailsDB[idx].from || '';
+  emailsDB.splice(idx, 1);
+  utilService.saveToStorage(EMAIL_KEY, emailsDB);
   return Promise.resolve(fromName);
 }
 
 // Reuse func - for all updates. When need to return - promise
 function updateEmail(prop, val, emailId) {
-  const foundEmail = emailsStorage.find(email => email.id === emailId);
-  const emailIdx = emailsStorage.findIndex(email => email.id === emailId);
+  const foundEmail = emailsDB.find(email => email.id === emailId);
+  const emailIdx = emailsDB.findIndex(email => email.id === emailId);
 
   // Make a deep copy and splice for vue reactivation
   const emailCopy = JSON.parse(JSON.stringify(foundEmail));
   emailCopy[prop] = val;
-  emailsStorage.splice(emailIdx, 1, emailCopy);
-  utilService.saveToStorage(EMAIL_KEY, emailsStorage);
-  return Promise.resolve(emailsStorage);
+  emailsDB.splice(emailIdx, 1, emailCopy);
+  utilService.saveToStorage(EMAIL_KEY, emailsDB);
+  return Promise.resolve(emailsDB);
+}
+
+function toggleStar(emailId) {
+  let emailIdx;
+  const email = emailsDB.find((email, idx) => {
+    if (email.id === emailId) {
+      emailIdx = idx;
+      return email;
+    }
+  });
+  let emailCopy = JSON.parse(JSON.stringify(email));
+  emailCopy.boxes.star = !email.boxes.star;
+  emailsDB.splice(emailIdx, 1, emailCopy);
+  utilService.saveToStorage(EMAIL_KEY, emailsDB);
+}
+
+function sendToNotes(emailId) {
+  const foundEmail = emailsDB.find(email => email.id === emailId);
+  const boxes = foundEmail.boxes;
+  for (const prop in boxes) {
+    boxes[prop] = false;
+  }
+  let noteTxt = 'Email from: ' + foundEmail.from + '  -  ';
+  noteTxt += foundEmail.body.length > 0 ? foundEmail.body : foundEmail.subject;
+
+  const note = {
+    type: 'noteText',
+    noteType: 'txt',
+    isPinned: boxes.star,
+    info: {
+      txt: noteTxt,
+      img: '',
+      video: '',
+      title: '',
+      todos: null,
+    },
+  };
+  noteService.createNote(note);
+  boxes.note = true;
+  utilService.saveToStorage(EMAIL_KEY, emailsDB);
+  return Promise.resolve();
 }
 
 function createNewEmail(emailInfo) {
@@ -54,14 +96,42 @@ function createNewEmail(emailInfo) {
     sentAt: Date.now(),
     boxes: emailInfo.boxes,
   };
-  emailsStorage.unshift(email);
-  utilService.saveToStorage(EMAIL_KEY, emailsStorage);
+  emailsDB.unshift(email);
+  utilService.saveToStorage(EMAIL_KEY, emailsDB);
 
   return Promise.resolve(email);
 }
 
+//Private functions
+
+// Samples data! to move to new service
 function _createSamplesEmails() {
-  const fromNames = ['Tomer', 'Mayan', 'Raffi', 'Tom', 'Michel', 'Guy', 'Shlomi', 'Ran', 'David', 'Jassy', 'Bryan', 'Shone', 'Jesus', 'Peter'];
+  const fromNames = [
+    'Rami',
+    'Oz',
+    'Guy',
+    'Ran',
+    'Daniel',
+    'Yaron',
+    'Nadav',
+    'Omer',
+    'Rami',
+    'Oz',
+    'Guy',
+    'Ran',
+    'Daniel',
+    'Yaron',
+    'Nadav',
+    'Omer',
+    'Rami',
+    'Oz',
+    'Guy',
+    'Ran',
+    'Daniel',
+    'Yaron',
+    'Nadav',
+    'Omer',
+  ];
   const emails = fromNames.map(_createEmail);
   utilService.saveToStorage(EMAIL_KEY, emails);
   return emails;
@@ -83,22 +153,4 @@ function _createEmail(from = utilService.createWord(6)) {
       note: false,
     },
   };
-}
-
-function toggleStar(emailId) {
-  let emailIdx;
-  const email = emailsStorage.find((email, idx) => {
-    if (email.id === emailId) {
-      emailIdx = idx;
-      return email;
-    }
-  });
-  let emailCopy = JSON.parse(JSON.stringify(email));
-  emailCopy.boxes.star = !email.boxes.star;
-  emailsStorage.splice(emailIdx, 1, emailCopy);
-  utilService.saveToStorage(EMAIL_KEY, emailsStorage);
-}
-
-function update(email) {
-  return utilService.saveToStorage(EMAIL_KEY, email);
 }

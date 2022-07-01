@@ -1,21 +1,22 @@
 import appHeader from './cmps/app-header.cmp.js';
 import { router } from './router.js';
 import appFooter from './cmps/app-footer.cmp.js';
-// import userMsg from './cmps/user-msg.cmp.js';
+// import userMsg from '../js/cmps/user-msg.cmp.js';
 
 const options = {
   template: `
-          <section>
+          <section class="container">
               <app-header />
-              <!-- <user-msg/> -->
-              <router-view/>
+            
+              <router-view></router-view>
+              <!-- <user-msg :msg="msg" v-if="isMsgShow"></user-msg> -->
               <app-footer />
           </section>
       `,
   components: {
-    //   userMsg,
     appHeader,
     appFooter,
+    // userMsg,
   },
 };
 

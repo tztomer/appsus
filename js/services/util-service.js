@@ -4,6 +4,7 @@ export const utilService = {
   getRandom,
   makeLorem,
   makeId,
+  getRandomColor,
   createWord,
   getFormattedHour,
   getFormattedDate,
@@ -116,4 +117,13 @@ function _populateWords() {
   words[26] = 'cryptogram';
   words[27] = 'torchlight';
   words[28] = 'bankruptcy';
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
