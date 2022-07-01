@@ -30,12 +30,9 @@ export default {
                 .then(notes => this.notes = notes)
         },
         onSelectNote(noteId) {
-            console.log('note selected!!', noteId)
-            
             this.selectedNoteId = noteId
         },
         onSaveNote() {
-            console.log('this.note', this.note)
             if (!this.note) {
                 this.$router.push('/keep')
                 this.selectedNoteId = null
@@ -44,7 +41,6 @@ export default {
                     .then(note => {
                         this.selectedNoteId = null
                         this.$router.push('/keep')
-                        console.log('note', note)
                         noteService.query()
                             .then(notes => this.notes = notes)
                     })

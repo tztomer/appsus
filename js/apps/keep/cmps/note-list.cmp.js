@@ -2,6 +2,7 @@ import notePreview from "../cmps/note-preview.cmp.js";
 import txtNote from "../cmps/text-note.cmp.js";
 import imgNote from "../cmps/img-note.cmp.js";
 import todosNote from "../cmps/todos-note.cmp.js";
+import videoNote from "../cmps/video-note.cmp.js";
 
 
 export default {
@@ -28,5 +29,6 @@ export default {
         txtNote,
         imgNote,
         todosNote,
+        videoNote
       },
 };

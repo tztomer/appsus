@@ -10,6 +10,7 @@ export const noteService = {
     query,
     get,
     saveNote,
+    getEmptyTodo
 }
 
 
@@ -27,11 +28,18 @@ function saveNote(note) {
     else return storageService.post(NOTES_KEY, note)
 }
 
-
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTES_KEY)
     if (!notes || !notes.length) {
         notes = theNotes.getTheNotes()
         utilService.saveToStorage(NOTES_KEY, notes)
+    }
+}
+
+function getEmptyTodo() {
+    return {
+        id: utilService.makeId(),
+        txt: '',
+        doneAt: null,
     }
 }
