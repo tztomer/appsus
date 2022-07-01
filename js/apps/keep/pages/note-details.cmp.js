@@ -13,13 +13,14 @@ import { utilService } from '../../../services/util-service.js';
 export default {
     template: `
     <section class="note-details-modal">
-    <pre>{{note}}</pre>
+    <!-- <pre>{{note}}</pre> -->
         <div contenteditable="true" v-if="note" class="title-box" style="width: 300px;" @input="event => onTitleInput(event)">{{note.info.title}}</div>
         <div contenteditable="true" v-if="noteTypeTxt" class="text-box" @input="event => onTextInput(event)" @keyup.enter="event => onAddNewLine(event)">{{note.info.txt}}</div>
         <img v-if="noteTypeImg" :src="note.info.url" class="note-details-img" alt="">
         <section v-if="noteTypeTodos" class="todo-list" >
             <div class="todo-item" v-for="(todo, index) in note.info.todos">
                 <div contenteditable="true" class="todo-text" @blur="event => onTodoInput(event, index)" @keydown.enter.prevent="event => onTodoInput(event, index)">{{todo.txt}}</div>
+                <button @click="onDeleteTodo(index)">X</button>
             </div>
             <div class="last-todo-item">
                 <div contenteditable="true" class="last-todo-text" @keydown.enter.prevent="event => onTodoInput(event, index)" @blur="event => onTodoInput(event, index)"></div>
@@ -32,10 +33,9 @@ export default {
             <div contenteditable="true" class="img-text" @input="event => onUrlInput(event)">{{note.info.url}}</div>
         </section>
         <section v-if="noteTypeVideo" class="youtube-section">
-            <iframe id="ytplayer" type="text/html"
-            :src="note.info.videoUrl"
-            frameborder="0"></iframe>
-            <div contenteditable="true" class="video-text" @input="event => onVideoUrlInput(event)">{{note.info.videoUrl}}</div>
+            <iframe id="ytplayer" type="text/html" :src="note.info.videoUrl" frameborder="0"></iframe>
+            <br><span>Enter a different Youtube URL:</span>
+            <div contenteditable="true" aria-label="youtube URL" class="video-text" @blur="event => onVideoUrlInput(event)"></div>
         </section>
     </section>
 `,
@@ -101,6 +101,10 @@ export default {
             }
             this.$emit('note', this.note)
         },
+        onDeleteTodo(index) {
+            this.note.info.todos.splice(index, 1)
+            this.$emit('note', this.note)
+        },
         onUrlInput(event) {
             const value = event.target.innerText
             this.note.info.url = value
@@ -108,9 +112,10 @@ export default {
         },
         onVideoUrlInput(event) {
             const value = event.target.innerText
-            console.log('value from url:', value)
-            const baseUrl = 
-            this.note.info.videoUrl = value
+            const videoId = value.slice(value.length - 11)
+            console.log('VideoId', videoId)
+            
+            this.note.info.videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`
             this.$emit('note', this.note)
         },
         onAddNewLine(event) {
@@ -120,8 +125,3 @@ export default {
         },
     },
 };
-// https://www.youtube.com/watch?v=T4MQrRDo20w
-// https://www.youtube.com/watch?v=w0p7ywfHesw
-
-// https://youtu.be/T4MQrRDo20w
-// https://www.youtube.com/watch?v=C-u5WLJ9Yk4

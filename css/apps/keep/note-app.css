@@ -12,11 +12,16 @@
     /* max-height: 400px; */
     background-color: rgb(48, 244, 244);
     position: fixed;
-    /* top: 50vh; */
+    top: 50vh;
     left: 50vw;
     transform: translate(-50%, -50%);
     box-shadow: 10px 10px 5px 100vh rgba(0, 0, 0, 0.6);
     z-index: 100;
+}
+
+.video-text, .img-text {
+    background-color: rgb(147, 237, 255);
+    border-radius: 5px;
 }
 
 .youtube-section {
@@ -50,9 +55,46 @@ body .selectedNoteId.screen {
     inset: 0;
 }
 
-.note-add {
+.note-add-div {
     display: flex;
     justify-content: space-between;
+    width: 600px;
+}
+
+.chosen-btn {
+    background-color: red;
+    border-radius: 5px;
+}
+
+#ytplayer {
+    max-width: 100%;
+}
+
+.note-action {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.note-action.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+.new-note-input {
+    padding: 7px;
+}
+
+.add-btn {
+    display: inline-block;
+    padding: 7px;
+}
+
+.note-add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 600px; */
+    /* text-align: center; */
 }
 
 /* NOTE LIST */

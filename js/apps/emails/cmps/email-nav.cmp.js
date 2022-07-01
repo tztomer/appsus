@@ -20,7 +20,7 @@ export default {
     changeEmail(eventName) {
       console.log('event name', eventName);
       eventBus.emit(eventName, { id: this.emailId });
-      this.emit('clicked');
+      this.$emit('clicked');
     },
     emitUpdateEmail(eventName, prop, val) {
       let emailId = this.emailId;

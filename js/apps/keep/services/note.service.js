@@ -10,7 +10,8 @@ export const noteService = {
     query,
     get,
     saveNote,
-    getEmptyTodo
+    getEmptyTodo,
+    getEmptyNote
 }
 
 
@@ -41,5 +42,14 @@ function getEmptyTodo() {
         id: utilService.makeId(),
         txt: '',
         doneAt: null,
+    }
+}
+
+function getEmptyNote(noteType) {
+    return {
+        type: noteType,
+        info: {
+            title: ''
+        }
     }
 }

@@ -11,18 +11,23 @@ export default {
  <section class="note-list">
         <div v-for="note in notes" :key="note.id" class="note-preview-container">
             <component :is="note.type" 
-                :noteInfo="note.info"
+                :note="note"
                 @click="showNote(note.id)">
             </component>
         </div>
  </section>
 `,
     props: ["notes"],
+    data() {
+        return {
+            hover: false
+        }
+    },
     methods: {
         showNote(noteId) {
             this.$router.push('/keep/' + noteId)
             this.$emit("selected", noteId)
-        }
+        },
     },
     components: {
         notePreview,
@@ -30,5 +35,5 @@ export default {
         imgNote,
         todosNote,
         videoNote
-      },
+    },
 };

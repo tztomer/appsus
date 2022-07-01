@@ -8,20 +8,50 @@ export default {
             <img :src="noteImg" alt="">
 
           </section>
+          <section @mouseover="hover = true" @mouseleave="hover = false" class="note-action" :class="{active: hover}">
+                <div @click="onPinNote(note.id)" class="add-btn"><i class="fas fa-thumbtack"></i></div>
+                <div @click="onNoteColorPick(note.id)" class="add-btn"><i class="fas fa-palette"></i></div>
+                <div @click="onSendNote(note)" class="add-btn"><i class="fas fa-envelope"></i></div>
+                <div @click="onDuplicateNote(note)" class="add-btn"><i class="fas fa-clone"></i></div>
+                <div @click="onTrashNote(note)" class="add-btn"><i class="fas fa-trash-alt"></i></div>
+            </section>
           `,
-    props: ['noteInfo'],
+    props: ['note'],
+    emits: ['click'],
+    data() {
+        return {
+            hover: false
+        }
+    },
     computed: {
         noteTitle() {
-            if (!this.noteInfo.title) return
-            return this.noteInfo.title
+            return this.note.info.title
         },
         noteTxt() {
-            if (!this.noteInfo.txt) return
-            return this.noteInfo.txt
+            return this.note.info.txt
         },
         noteImg() {
-            if (!this.noteInfo.url) return
-            return this.noteInfo.url
+            return this.note.info.url
         }
-    }
+    },
+    methods: {
+        onPinNote(noteId) {
+            console.log('noteId', noteId)
+            
+        },
+        onNoteColorPick(noteId) {
+            console.log('noteId', noteId)
+        },
+        onTrashNote(note) {
+            console.log('note', note)
+        },
+        onSendNote(note) {
+            console.log('note', note)
+            
+        },
+        onDuplicateNote(note) {
+            console.log('note', note)
+            
+        }
+    },
   }
