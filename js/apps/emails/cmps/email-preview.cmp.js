@@ -18,8 +18,9 @@ export default {
         {{email.subject}}
         </span> 
          -  
+       
         <long-text class="email-preview-body" 
-        :txt="email.body" length="50">
+        :txt="email.body" length="60">
         </long-text>
     </div>
         
@@ -55,7 +56,8 @@ export default {
     },
     nameColor() {
       let color = utilService.getRandomColor();
-      return window.innerWidth <= 750 ? { background: color } : '';
+      console.log('color', color);
+      return { background: color };
     },
     starClass() {
       return this.email.boxes.star ? 'fas fa-star starred' : 'far fa-star';

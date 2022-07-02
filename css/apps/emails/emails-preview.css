@@ -30,8 +30,11 @@ section.email-list {
   display: flex;
   align-items: center;
   position: relative;
+  /* padding: 0px 10px; */
 }
-
+.email-lists-wrapper {
+  width: 100%;
+}
 .email-preview .starred {
   color: #f8cb4d;
 }
@@ -43,16 +46,29 @@ section.email-preview {
   gap: 20px;
   align-items: center;
   flex: 1;
+  cursor: pointer;
+  transition: all 100ms ease-out;
+  padding: 10px;
+}
+
+.email-previews:hover {
+  background: #f1f3f4;
+
+  transition: all 400ms ease-out;
 }
 
 .email-preview-content {
   flex: 1;
 }
 
-/* .email-preview > * {
-  min-width: 50px;
-} */
-
+span.email-preview-from {
+  min-width: 90px;
+  text-align: center;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  color: white;
+}
 span.email-preview-from {
   min-width: 90px;
 }

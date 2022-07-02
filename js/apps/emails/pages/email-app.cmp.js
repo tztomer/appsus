@@ -14,7 +14,9 @@ export default {
             <search-bar @filtered="setFilter" :searchData="searchData">
             </search-bar>
         </div>
-        
+      
+
+
         <section class="main-content">
             <button @click="isMenuOpen = !isMenuOpen" class="hamburger"><i class="fas fa-bars"></i></button>
 
@@ -32,20 +34,25 @@ export default {
                 </email-side-filter>
             </aside>
 
-            <email-list v-if ="emails"
-            :emails="emailsToDisplay"
-            @updated="updateEmail">
-            </email-list>
+        <div class="email-lists-wrapper">
+
+          <transition name="fade">
+      <email-compose :isReply="isReply"
+       @emailCreated="isCompose = false"
+        v-if="isCompose"></email-compose>
+      </transition>
+          <email-list v-if ="emails"
+          :emails="emailsToDisplay"
+          @updated="updateEmail">
+          
+          </email-list>
+        </div>    
 
             <button @click="composeEmail" class="mobile-compose">
             <i class="fas fa-paper-plane"></i></button>
         </section>
         
-        <transition name="fade">
-        <email-compose :isReply="isReply"
-         @emailCreated="isCompose = false"
-          v-if="isCompose"></email-compose>
-        </transition>
+        
 
     </section>
     `,
@@ -96,9 +103,9 @@ export default {
         });
       });
     },
-    updateEmail(keys) {
-      console.log('keys', ...keys);
-      // emailService.updateEmail(keys.prop, keys.val, keys.emailId);
+    updateEmail(email) {
+      console.log('email', email);
+      emailService.updateEmail();
     },
 
     replyToEmail(emailId) {
@@ -122,12 +129,11 @@ export default {
         return acc;
       }, {});
     },
-    toggleStar(emailId) {
+    toggleStar(email) {
       // done
-      emailService.toggleStar(emailId.id);
+      emailService.toggleStar(email.id);
       emailService.getEmails().then(emails => {
         this.emails = emails;
-        console.log(emails);
       });
     },
   },
@@ -179,6 +185,7 @@ export default {
 
     emailService.getEmails().then(emails => {
       this.emails = emails;
+      console.log('get emails from created emails', emails);
       this.countUnread();
     });
 
