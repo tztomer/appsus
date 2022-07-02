@@ -61,7 +61,7 @@ function getEmptyNote(noteType) {
             title: ''
         },
         style: {
-            backgroundColor: 'rgb(48, 244, 244)'
+            backgroundColor: 'rgb(212, 218, 218)'
         }
     }
 }
