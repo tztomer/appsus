@@ -18,14 +18,8 @@ export default {
     `,
   methods: {
     changeEmail(eventName) {
-<<<<<<< HEAD
-      console.log('event name', eventName);
-      eventBus.emit(eventName, { id: this.emailId });
-      this.$emit('clicked');
-=======
       eventBus.emit(eventName, { id: this.email.id });
-      this.emit('clicked');
->>>>>>> 138d2318852d736ed552390c36bde19fb1df51ea
+      this.emit$('clicked');
     },
     emitUpdateEmail(eventName) {
       let email = this.email;
