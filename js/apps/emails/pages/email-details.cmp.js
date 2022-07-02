@@ -6,7 +6,7 @@ export default {
   template: `
     <section v-if="email" class="email-details">
         <div class="email-header">
-           <img src="img/icons/contact-icon.png" class="contact-img" alt="contact-icon">
+           <img src="./img/icons/contact-icon.png" class="contact-img" alt="contact-icon">
         
             <button @click="isMenuOpen = !isMenuOpen" class="dots-menu">
             <i class="fas fa-ellipsis-v"></i>
