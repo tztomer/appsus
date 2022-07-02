@@ -89,7 +89,7 @@ export default {
             if (this.txtNote) return `What's on your mind?`
             else if (this.imgNote) return 'place image URL here'
             else if (this.videoNote) return 'place youtube URL here'
-            else if (this.todosNote) return `put some todo's here separated by a comma`
+            else if (this.todosNote) return `put some todo's here separated by a comma + space`
         }
     }
 
