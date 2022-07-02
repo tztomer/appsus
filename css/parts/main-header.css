@@ -21,46 +21,35 @@
   border-radius: 3px;
 }
 
-.nav-link {
-  display: block;
-  height: 110px;
-  width: 110px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  color: #2c3941;
-  border-radius: 100%;
-  transition: background-color 0.2s;
-  font-size: 14px;
-}
-
 .menu-icon-container {
-  width: 40px;
+  width: 71px;
   height: 100%;
   cursor: pointer;
   position: relative;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2px;
 
   box-sizing: border-box;
 }
 .menu-bar {
-  position: absolute;
-  width: 100%;
-  height: 4px;
+  width: 84%;
+  height: 100%;
   background: #d32e2a;
-
-  border-radius: 20px;
+  border-radius: 0px;
+  border-radius: 0px;
 }
 
 .menu-icon-container:hover .menu-bar {
-  animation-duration: 1s;
+  animation-duration: 300ms;
   animation-name: slideOut;
-  animation-direction: alternate;
+
   animation-timing-function: ease-out;
 }
 
-.one {
+/* .one {
   top: 25px;
   animation-delay: 0.1s;
   transition: all 0.3s;
@@ -69,30 +58,19 @@
 .two {
   top: 32px;
   transition: all 0.3s;
-}
+} */
 
 @keyframes slideOut {
   0% {
-    width: 100%;
-    left: 0%;
-    right: auto;
+    background-color: #d32e2a;
   }
 
   50% {
-    width: 0%;
-    left: 0%;
-    right: auto;
-  }
-  51% {
-    width: 0%;
-    right: 0%;
-    left: auto;
+    background-color: blue;
   }
 
   100% {
-    width: 100%;
-    right: 0%;
-    left: auto;
+    background-color: #d32e2a;
   }
 }
 
@@ -102,14 +80,22 @@
   animation: none;
 }
 .active .one {
-  top: 50%;
-  left: 0%;
-  transform: rotate(45deg);
 }
 .active .two {
-  top: 50%;
-  left: 0%;
-  transform: rotate(-45deg);
+}
+.active .three {
+}
+.active .four {
+}
+.active .five {
+}
+.active .six {
+}
+.active .seven {
+}
+.active .eight {
+}
+.active .nine {
 }
 
 .logo-img {
