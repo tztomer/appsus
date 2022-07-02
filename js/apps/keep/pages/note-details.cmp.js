@@ -114,7 +114,7 @@ export default {
             const value = event.target.innerText
             const videoId = value.slice(value.length - 11)
             console.log('VideoId', videoId)
-            
+
             this.note.info.videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`
             this.$emit('note', this.note)
         },

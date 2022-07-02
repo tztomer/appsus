@@ -10,7 +10,8 @@ export default {
       <note-details v-if="selectedNoteId" @note="putNoteInData" :noteId="selectedNoteId"/>
     <section class="note-index">
         <note-add @noteAdded="addNote"/>
-        <note-list :notes="notesForDisplay" @selected="onSelectNote"/>
+        <note-list :notes="notesForDisplay" @selected="onSelectNote" @deleteNote="deleteNote" @duplicateNote="duplicateNote"
+        @colorChanged="colorChanged"/>
     </section>
 `,
     data() {
@@ -40,14 +41,48 @@ export default {
                 noteService.saveNote(this.note)
                     .then(note => {
                         this.selectedNoteId = null
+                        console.log('!');
                         this.$router.push('/keep')
                         noteService.query()
-                            .then(notes => this.notes = notes)
+                            .then(notes => {
+                                this.notes = notes
+                            })
                     })
             }
         },
         putNoteInData(note) {
             this.note = note
+        },
+        deleteNote(id) {
+            console.log('id:', id)
+            noteService.remove(id)
+                .then(() => {
+                    console.log('Deleted successfully')
+                    const idx = this.notes.findIndex((note) => note.id === id)
+                    this.notes.splice(idx, 1)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        duplicateNote(note) {
+            noteService.duplicateNote(note)
+                .then(() => {
+                    console.log('Duplicated successfully')
+                    noteService.query()
+                        .then(notes => {
+                            this.notes = notes
+                        })
+                })
+        },
+        colorChanged(note) {
+            noteService.saveNote(note)
+                .then(note => {
+                    noteService.query()
+                        .then(notes => {
+                            this.notes = notes
+                        })
+                })
         }
     },
     computed: {

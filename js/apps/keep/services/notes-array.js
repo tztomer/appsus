@@ -14,6 +14,9 @@ const notes = [
         info: {
             title: "sometime in the future",
             txt: "Fullstack Me Baby!"
+        },
+        style: {
+            backgroundColor: null
         }
     },
     {
@@ -24,7 +27,7 @@ const notes = [
             title: "Yesterday's Pancake"
         },
         style: {
-            backgroundColor: "#00d"
+            backgroundColor: null
         }
     },
     {
@@ -44,6 +47,9 @@ const notes = [
                     txt: "Coding power",
                     doneAt: 187111111
                 }]
+        },
+        style: {
+            backgroundColor: null
         }
     },
     {
@@ -52,6 +58,9 @@ const notes = [
         info: {
             videoUrl: "https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1",
             title: 'watch later'
+        },
+        style: {
+            backgroundColor: null
         }
     }
 ];

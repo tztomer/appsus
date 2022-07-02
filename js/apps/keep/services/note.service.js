@@ -11,22 +11,31 @@ export const noteService = {
     get,
     saveNote,
     getEmptyTodo,
-    getEmptyNote
+    getEmptyNote,
+    remove,
+    duplicateNote
 }
-
 
 function query() {
     return storageService.query(NOTES_KEY)
 }
 
-
 function get(noteId) {
     return storageService.get(NOTES_KEY, noteId)
+}
+
+function remove(noteId) {
+    return storageService.remove(NOTES_KEY, noteId)
 }
 
 function saveNote(note) {
     if (note.id) return storageService.put(NOTES_KEY, note)
     else return storageService.post(NOTES_KEY, note)
+}
+
+function duplicateNote(note) {
+    note.id = utilService.makeId()
+    return storageService.post(NOTES_KEY, note)
 }
 
 function _createNotes() {
@@ -50,6 +59,9 @@ function getEmptyNote(noteType) {
         type: noteType,
         info: {
             title: ''
+        },
+        style: {
+            backgroundColor: null
         }
     }
 }
