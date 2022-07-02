@@ -6,11 +6,16 @@ export default {
     <section class="main-header">
 
         <router-link to="/">
-            <img src="img/logo/logo.png" alt="logo" class="logo-img" />
+            <img src="img/logo/logo.png" alt="logo" class="logo-img"  />
         </router-link>
-            <div class="menu-icon-container">
-                <img class="menu-icon" id="menuIcon" @click="isMenuOpen = !isMenuOpen"
-                src="img/icons/menu.png" alt="menu" />
+
+            <div class="menu-icon-container" :class="{ active: isMenuOpen }" id="menuIcon" @click="isMenuOpen = !isMenuOpen">
+            
+
+              <div class="menu-bar one"></div>
+             <div class="menu-bar two"></div>  
+
+       
             </div>
         
 

@@ -10,6 +10,7 @@ aside.side-menu.side-container {
 section.emails-side-filters {
   height: 100vh;
   width: 15vw;
+  cursor: pointer;
 }
 
 ul.side-filter {
@@ -22,6 +23,13 @@ ul.side-filter {
   justify-content: space-around;
 }
 
+ul.side-filter i {
+  padding-right: 10px;
+  color: #4285f4;
+}
+li.filter-item {
+  cursor: pointer;
+}
 button.compose-btn {
   background: white;
   border: none;
