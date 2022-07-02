@@ -16,7 +16,7 @@ const notes = [
             txt: "Fullstack Me Baby!"
         },
         style: {
-            backgroundColor: null
+            backgroundColor: 'rgb(48, 244, 244)'
         }
     },
     {
@@ -27,7 +27,7 @@ const notes = [
             title: "Yesterday's Pancake"
         },
         style: {
-            backgroundColor: null
+            backgroundColor: 'rgb(48, 244, 244)'
         }
     },
     {
@@ -49,7 +49,7 @@ const notes = [
                 }]
         },
         style: {
-            backgroundColor: null
+            backgroundColor: 'rgb(48, 244, 244)'
         }
     },
     {
@@ -60,7 +60,7 @@ const notes = [
             title: 'watch later'
         },
         style: {
-            backgroundColor: null
+            backgroundColor: 'rgb(48, 244, 244)'
         }
     }
 ];
