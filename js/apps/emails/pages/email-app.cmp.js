@@ -23,7 +23,7 @@ export default {
             <aside class="side-menu side-container">
                 <button @click.prevent="composeEmail"
                 class="compose-btn">
-                <img src="/img/logo/cop.png" alt="" srcset="">
+                <img src="./img/logo/cop.png" alt="" srcset="">
                 </button>
 
                 <email-side-filter @filtered="setSideFilter" 
