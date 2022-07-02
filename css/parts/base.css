@@ -9,13 +9,16 @@ body {
 
 p {
   margin: 0px;
-  padding-inline: 1em;
+  padding: 0px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .container {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+}
+
+h1 {
+  margin: 0px;
 }

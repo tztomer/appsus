@@ -49,14 +49,7 @@ export default {
         });
     },
   },
-  computed: {
-    timeToShow() {
-      return utilService.getFormattedHour(this.email.sentAt);
-    },
-    dateToShow() {
-      return utilService.getFormattedDate(this.email.sentAt);
-    },
-  },
+  computed: {},
   watch: {
     '$route.params.emailId'() {
       this.getEmail();

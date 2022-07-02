@@ -103,9 +103,9 @@ export default {
         });
       });
     },
-    updateEmail(keys) {
-      // console.log('keys', ...keys);
-      // emailService.updateEmail(keys.prop, keys.val, keys.emailId);
+    updateEmail(email) {
+      console.log('email', email);
+      emailService.updateEmail();
     },
 
     replyToEmail(emailId) {
@@ -129,12 +129,11 @@ export default {
         return acc;
       }, {});
     },
-    toggleStar(emailId) {
+    toggleStar(email) {
       // done
-      emailService.toggleStar(emailId.id);
+      emailService.toggleStar(email.id);
       emailService.getEmails().then(emails => {
         this.emails = emails;
-        console.log(emails);
       });
     },
   },
@@ -186,6 +185,7 @@ export default {
 
     emailService.getEmails().then(emails => {
       this.emails = emails;
+      console.log('get emails from created emails', emails);
       this.countUnread();
     });
 

@@ -1,5 +1,3 @@
-import progressBar from '../../../cmps/progress-bar.cmp.js';
-
 export default {
   template: `
     <section class="email-side-filter">
@@ -38,7 +36,7 @@ export default {
             v-if="menuClass === 'side-menu-open'" class="close-filter-menu">
             <i class="fas fa-chevron-left"></i>
             </button>
-            <progress-bar :fillWidth="barWidth"></progress-bar>
+            <!-- <progress-bar :fillWidth="barWidth"></progress-bar> -->
         </ul>
     </section>
     `,
@@ -64,8 +62,6 @@ export default {
       return parseInt(((this.emailsCount - unreadSum) / this.emailsCount) * 100);
     },
   },
-  components: {
-    progressBar,
-  },
+  components: {},
   props: ['unreadCount', 'menuClass', 'emailsCount'],
 };

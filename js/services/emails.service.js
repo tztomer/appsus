@@ -2,52 +2,36 @@ import { utilService } from '../services/util-service.js';
 import { storageService } from '../services/async-storage-service.js';
 
 const EMAIL_KEY = 'emails';
-const emailsDB = utilService.loadFromStorage(EMAIL_KEY) || _createSamplesEmails();
+const emailsFromStorage = utilService.loadFromStorage(EMAIL_KEY) || initCreateEmails();
 
 export const emailService = {
   getEmails,
   updateEmail,
   createNewEmail,
   getEmailById,
-  sendToNotes,
   removeEmail,
   toggleStar,
 };
 
 function getEmails() {
   return storageService.query(EMAIL_KEY);
-  // return Promise.resolve(emailsDB);
 }
 
-function getEmailById(emailId) {
-  const email = emailsDB.find(email => email.id === emailId);
-  return Promise.resolve(email);
+function getEmailById(bookId) {
+  return storageService.get(EMAIL_KEY, bookId);
 }
 
 function removeEmail(emailId) {
-  const idx = emailsDB.findIndex(email => email.id === emailId);
-  const fromName = emailsDB[idx].from || '';
-  emailsDB.splice(idx, 1);
-  utilService.saveToStorage(EMAIL_KEY, emailsDB);
-  return Promise.resolve(fromName);
+  return storageService.remove(EMAIL_KEY, emailId);
 }
 
-// Reuse func - for all updates. When need to return - promise
-function updateEmail(prop, val, emailId) {
-  const foundEmail = emailsDB.find(email => email.id === emailId);
-  const emailIdx = emailsDB.findIndex(email => email.id === emailId);
-
-  // Make a deep copy and splice for vue reactivation
-  const emailCopy = JSON.parse(JSON.stringify(foundEmail));
-  emailCopy[prop] = val;
-  emailsDB.splice(emailIdx, 1, emailCopy);
-  utilService.saveToStorage(EMAIL_KEY, emailsDB);
-  return Promise.resolve(emailsDB);
+function updateEmail(email) {
+  return storageService.put(EMAIL_KEY, email);
 }
 
 function toggleStar(emailId) {
   let emailIdx;
-  const email = emailsDB.find((email, idx) => {
+  const email = emailsFromStorage.find((email, idx) => {
     if (email.id === emailId) {
       emailIdx = idx;
       return email;
@@ -55,35 +39,8 @@ function toggleStar(emailId) {
   });
   let emailCopy = JSON.parse(JSON.stringify(email));
   emailCopy.boxes.star = !email.boxes.star;
-  emailsDB.splice(emailIdx, 1, emailCopy);
-  utilService.saveToStorage(EMAIL_KEY, emailsDB);
-}
-
-function sendToNotes(emailId) {
-  const foundEmail = emailsDB.find(email => email.id === emailId);
-  const boxes = foundEmail.boxes;
-  for (const prop in boxes) {
-    boxes[prop] = false;
-  }
-  let noteTxt = 'Email from: ' + foundEmail.from + '  -  ';
-  noteTxt += foundEmail.body.length > 0 ? foundEmail.body : foundEmail.subject;
-
-  const note = {
-    type: 'noteText',
-    noteType: 'txt',
-    isPinned: boxes.star,
-    info: {
-      txt: noteTxt,
-      img: '',
-      video: '',
-      title: '',
-      todos: null,
-    },
-  };
-  noteService.createNote(note);
-  boxes.note = true;
-  utilService.saveToStorage(EMAIL_KEY, emailsDB);
-  return Promise.resolve();
+  emailsFromStorage.splice(emailIdx, 1, emailCopy);
+  utilService.saveToStorage(EMAIL_KEY, emailsFromStorage);
 }
 
 function createNewEmail(emailInfo) {
@@ -96,8 +53,8 @@ function createNewEmail(emailInfo) {
     sentAt: Date.now(),
     boxes: emailInfo.boxes,
   };
-  emailsDB.unshift(email);
-  utilService.saveToStorage(EMAIL_KEY, emailsDB);
+  emailsFromStorage.unshift(email);
+  utilService.saveToStorage(EMAIL_KEY, emailsFromStorage);
 
   return Promise.resolve(email);
 }
@@ -105,7 +62,7 @@ function createNewEmail(emailInfo) {
 //Private functions
 
 // Samples data! to move to new service
-function _createSamplesEmails() {
+function initCreateEmails() {
   const fromNames = [
     'Tomer Zairi',
     'Mayan Shlomi',

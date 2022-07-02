@@ -2,14 +2,14 @@ import { eventBus } from '../../../services/eventBus-service.js';
 // , EVENT_MESSAGE
 export default {
   name: 'email nav',
-  props: ['emailId'],
+  props: ['email'],
   template: `
     <section class="email-menu">
         <button class="reply" @click="changeEmail('reply-email')">
         <i class="menu-icon fas fa-reply"></i><span class="menu-item-txt">Reply</span></button>
 
         <button class="unread" 
-        @click="emitUpdateEmail('updated-email', 'isRead', false)">
+        @click="emitUpdateEmail('updated-email')">
         <i class="menu-icon fas fa-envelope"></i>Mark as unread</button>
 
         <button class="remove" @click="changeEmail('remove-email')">
@@ -18,15 +18,15 @@ export default {
     `,
   methods: {
     changeEmail(eventName) {
-      console.log('event name', eventName);
-      eventBus.emit(eventName, { id: this.emailId });
+      eventBus.emit(eventName, { id: this.email.id });
       this.emit('clicked');
     },
-    emitUpdateEmail(eventName, prop, val) {
-      let emailId = this.emailId;
-      eventBus.emit(eventName, { prop, val, emailId });
+    emitUpdateEmail(eventName) {
+      let email = this.email;
+      eventBus.emit(eventName, { email, eventName });
       this.$emit('clicked');
       this.$emit('emailUnread');
     },
   },
 };
+// 'isRead', false

@@ -1,4 +1,4 @@
-import emailMenu from '../../emails/cmps/email-nav.cmp.js';
+import emailNav from '../../emails/cmps/email-nav.cmp.js';
 import longText from '../../../cmps/long-text.cmp.js';
 
 export default {
@@ -12,11 +12,11 @@ export default {
         <div class="menu-container">
 
             <transition name="fade">
-            <email-menu class="extended-menu"
-            :emailId="email.id" v-if="isMenuOpen"
+            <email-nav class="extended-menu"
+            :email="email" v-if="isMenuOpen"
             @clicked="isMenuOpen = false"
             @emailUnread="() => {this.$emit('emailUnread')}">
-            </email-menu>
+            </email-nav>
             </transition>
 
             <button @click="isMenuOpen = !isMenuOpen" class="dots-vertical">
@@ -50,7 +50,7 @@ export default {
     },
   },
   components: {
-    emailMenu,
+    emailNav,
     longText,
   },
   props: ['email'],
