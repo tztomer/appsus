@@ -10,8 +10,7 @@ export default {
             <email-preview
             :email="email" 
             :key="email.id"
-            @click.native="selectEmail(email)"
-            :style="email.isRead ? isReadProperties : {}">
+            @click.native="selectEmail(email)">
             </email-preview>
 
             <email-extended
@@ -82,9 +81,4 @@ export default {
     emailPreview,
     emailExtended,
   },
-  computed: {
-    isReadProperties() {
-      return 'background-color:#f1f3f4 ;font-weight: 100'
-    }
-  }
 };

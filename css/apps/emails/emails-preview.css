@@ -84,9 +84,19 @@ span.email-preview-from {
   font-weight: 700;
 }
 
-.email-preview.email-read .email-preview-subject {
+/* .email-preview.email-read .email-preview-subject {
   font-weight: 100;
+} */
+.email-read .email-preview-subject {
+  font-weight: 200;
+}
+section.email-preview.email-read {
+  background: #f1f3f4;
+  font-weight: 200;
+}
 
+section.email-preview.email-unread{
+  background-color: white;
 }
 
 .email-extended {
