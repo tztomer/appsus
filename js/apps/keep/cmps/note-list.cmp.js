@@ -9,7 +9,7 @@ export default {
     name: 'note-list',
     template: `
  <section class="note-list">
-        <div v-for="note in notes" :key="note.id" class="note-preview-container" :style="note.style.backgroundColor ? {backgroundColor: note.style.backgroundColor} : {backgroundColor: 'rgb(48, 244, 244)'}">
+        <div v-for="note in notes" :key="note.id" class="note-preview-container" :style="note.style.backgroundColor ? {'background-color': note.style.backgroundColor} : {'background-color': 'rgb(48, 244, 244)'}">
             <component :is="note.type" 
                 :note="note"
                 @showNote="showNote"
