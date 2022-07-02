@@ -8,28 +8,13 @@ export default {
         <router-link to="/">
             <img src="img/logo/logo.png" alt="logo" class="logo-img"  />
         </router-link>
-
-            <div class="menu-icon-container" :class="{ active: isMenuOpen }" id="menuIcon" @click="isMenuOpen = !isMenuOpen">
-            <div class="menu-bar one"></div>
-             <div class="menu-bar two"></div>  
-             <div class="menu-bar three"></div>  
-             <div class="menu-bar four"></div>  
-             <div class="menu-bar five"></div>  
-             <div class="menu-bar six"></div>  
-             <div class="menu-bar seven"></div>  
-             <div class="menu-bar eight"></div>  
-             <div class="menu-bar nine"></div>  
-
-       
-            </div>
         
-
-            <transition name="fade">
-                <main-nav id="menu" v-if="isMenuOpen" @clicked="this.isMenuOpen = false">
-                </main-nav>
-            </transition>
+            <div class="menu-icon-container fas fa-bars" :class="{ active: isMenuOpen }" id="menuIcon" @click="isMenuOpen = !isMenuOpen">
+</div>
      
     </section>
+    <main-nav id="menu" v-if="isMenuOpen">
+                </main-nav>
     `,
   data() {
     return {
@@ -38,7 +23,11 @@ export default {
   },
   methods: {
     documentClick(ev) {
+      console.log('ev', ev);
       if (ev.target.id !== 'menu' && ev.target.id !== 'menuIcon') this.isMenuOpen = false;
+    },
+    openMenu(ev) {
+      ev.target;
     },
   },
   watch: {

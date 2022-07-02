@@ -27,59 +27,33 @@
   cursor: pointer;
   position: relative;
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 2px;
 
   box-sizing: border-box;
 }
-.menu-bar {
-  width: 84%;
-  height: 100%;
-  background: #d32e2a;
-  border-radius: 0px;
-  border-radius: 0px;
+.menu-icon-container.fa-bars:before {
+  content: '\f0c9';
+  position: absolute;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+}
+.menu-icon-container:hover {
+  color: #d32e2a;
 }
 
-.menu-icon-container:hover .menu-bar {
-  animation-duration: 300ms;
-  animation-name: slideOut;
-
-  animation-timing-function: ease-out;
+.menu-icon-container.active.fa-bars:before {
+  content: '\f00d';
+  color: #d32e2a;
 }
-
-/* .one {
-  top: 25px;
-  animation-delay: 0.1s;
-  transition: all 0.3s;
-}
-
-.two {
-  top: 32px;
-  transition: all 0.3s;
-} */
-
-@keyframes slideOut {
-  0% {
-    background-color: #d32e2a;
-  }
-
-  50% {
-    background-color: blue;
-  }
-
-  100% {
-    background-color: #d32e2a;
-  }
-}
-
 /**/
 
 .menu-icon-container:hover .menu-bar.active {
   animation: none;
 }
-.active .one {
+/* .active .one {
 }
 .active .two {
 }
@@ -96,7 +70,7 @@
 .active .eight {
 }
 .active .nine {
-}
+} */
 
 .logo-img {
   height: 39px;
