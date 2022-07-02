@@ -10,10 +10,15 @@ export default {
         </router-link>
 
             <div class="menu-icon-container" :class="{ active: isMenuOpen }" id="menuIcon" @click="isMenuOpen = !isMenuOpen">
-            
-
-              <div class="menu-bar one"></div>
+            <div class="menu-bar one"></div>
              <div class="menu-bar two"></div>  
+             <div class="menu-bar three"></div>  
+             <div class="menu-bar four"></div>  
+             <div class="menu-bar five"></div>  
+             <div class="menu-bar six"></div>  
+             <div class="menu-bar seven"></div>  
+             <div class="menu-bar eight"></div>  
+             <div class="menu-bar nine"></div>  
 
        
             </div>
