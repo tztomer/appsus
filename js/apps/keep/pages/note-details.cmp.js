@@ -1,18 +1,10 @@
 import { noteService } from "../services/note.service.js";
 import { utilService } from '../../../services/util-service.js';
 
-// :action="formSubmit"
-// @blur="formSubmit"
-//  <button @click="onRemoveTodo">X</button>
-// @change="saveNote"
-//        saveNote() {
-//    this.$emit('note', this.note) }
-// @keyup.enter="event => onAddTodoInput(event, index)"
-// width="640" height="360"
-
+//:class="{bgColor: checkColor}"
 export default {
     template: `
-    <section class="note-details-modal">
+    <section class="note-details-modal" v-if="noteColor" :style="{'background-color': noteColor}">
     <!-- <pre>{{note}}</pre> -->
         <div contenteditable="true" v-if="note" class="title-box" style="width: 300px;" @input="event => onTitleInput(event)">{{note.info.title}}</div>
         <div contenteditable="true" v-if="noteTypeTxt" class="text-box" @input="event => onTextInput(event)" @keyup.enter="event => onAddNewLine(event)">{{note.info.txt}}</div>
@@ -48,18 +40,22 @@ export default {
             noteTypeTodos: null,
             noteTypeVideo: null,
             noteTitle: null,
+            noteColor: null
         };
     },
     created() {
         const noteId = this.noteId
         noteService.get(noteId)
             .then(note => {
+                console.log('note', note)
+                
                 const noteType = note.type
                 this.note = note
                 if (noteType === 'txtNote') this.noteTypeTxt = noteType
                 if (noteType === 'imgNote') this.noteTypeImg = noteType
                 if (noteType === 'todosNote') this.noteTypeTodos = noteType
                 if (noteType === 'videoNote') this.noteTypeVideo = noteType
+                this.noteColor = note.style.backgroundColor
             })
     },
     methods: {

@@ -54,9 +54,10 @@ export default {
       this.$emit('showNote', this.note.id)
     },
     changeNoteBackground(color) {
-      this.note.style.backgroundColor = color
-      this.$emit('colorChanged', this.note)
-    }
+      const note = this.note
+      note.style.backgroundColor = color
+      this.$emit('colorChanged', note)
+  }
   },
   components: {
     colorPicker,

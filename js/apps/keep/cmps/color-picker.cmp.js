@@ -9,10 +9,6 @@ export default {
         <div @click="changeToLightBlue" class="light-blue-color"></div>
     </section>
 `,
-    data() {
-        return {};
-    },
-    created() { },
     methods: {
         changeToRed() {
             this.$emit('changeNoteBackground', 'red')
@@ -33,7 +29,4 @@ export default {
             this.$emit('changeNoteBackground', 'rgb(25, 183, 251)')
         },
     },
-    computed: {},
-    unmounted() { },
-    components: {}
 };

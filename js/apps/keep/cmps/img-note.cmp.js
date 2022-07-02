@@ -19,7 +19,7 @@ export default {
                 </label>
                 </div>
                 <div @click="onSendNote(note)" class="add-btn"><i class="fas fa-envelope"></i></div>
-                <div @click="onDuplicateNote(note)" class="add-btn"><i class="fas fa-clone"></i></div>
+                <div @click="onDuplicateNote" class="add-btn"><i class="fas fa-clone"></i></div>
                 <div @click="onTrashNote(note.id)" class="add-btn"><i class="fas fa-trash-alt"></i></div>
             </section>
           `,
@@ -57,17 +57,20 @@ export default {
             console.log('note', note)
             
         },
-        onDuplicateNote(note) {
-            this.$emit('duplicateNote', note)
+        onDuplicateNote() {
+            console.log('this.note', this.note)
+            
+            this.$emit('duplicateNote', this.note)
         },
         showNote(){
             console.log('noteId', this.note.id)
             this.$emit('showNote', this.note.id)
         },
         changeNoteBackground(color) {
-            this.note.style.backgroundColor = color
-            this.$emit('colorChanged', this.note)
-        },
+            const note = this.note
+            note.style.backgroundColor = color
+            this.$emit('colorChanged', note)
+        }
     },
     components: {
         colorPicker,
