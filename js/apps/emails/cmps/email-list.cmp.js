@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     selectEmail(email) {
-      console.log('email!!!', email)
+      console.log('$route.params before', this.$route.params)
       
       email.isRead = true
       emailService.updateEmail(email)
@@ -54,13 +54,14 @@ export default {
         return;
       }
       // Make the email read
-      if (!isRead) this.$emit('updated', 'isRead', true, emailId);
+      if (!email.isRead) this.$emit('updated', 'isRead', true, emailId);
     },
     emitWaitingEmails() {
       this.emailsToBeRead.forEach(emailId => {
         this.$emit('updated', 'isRead', true, emailId);
       });
       this.emailsToBeRead = [];
+      console.log('$route.params after', this.$route.params)
     },
   },
   watch: {
@@ -72,6 +73,7 @@ export default {
       deep: true,
     },
     '$route.params.filter'(newVal, oldVal) {
+      
       if (oldVal === '+unread') {
         this.emitWaitingEmails();
       }

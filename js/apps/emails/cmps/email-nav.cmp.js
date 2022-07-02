@@ -7,8 +7,6 @@ export default {
     <section class="email-menu">
         <button class="reply" @click="changeEmail('reply-email')">
         <i class="menu-icon fas fa-reply"></i><span class="menu-item-txt">Reply</span></button>
-
-        
         <button class="unread" 
         @click="emitUpdateEmail('updated-email')">
         <i class="menu-icon fas fa-envelope"></i>Mark as unread</button>
