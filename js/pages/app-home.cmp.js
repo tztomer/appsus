@@ -6,7 +6,7 @@ export default {
 
     <div class="homepage-wrapper">
 
-    <img src="/img/homepage/header-img.webp" alt="" srcset="">
+    <img src="./img/homepage/header-img.webp" alt="" srcset="">
     <div class="left-side">
 
         <div class="header-textarea">
