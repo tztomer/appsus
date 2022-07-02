@@ -56,7 +56,6 @@ export default {
     },
     nameColor() {
       let color = utilService.getRandomColor();
-      console.log('color', color);
       return { background: color };
     },
     starClass() {

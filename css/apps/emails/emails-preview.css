@@ -80,8 +80,13 @@ span.email-preview-from {
   flex-direction: row;
 }
 
-span.email-preview-subject {
+.email-preview-subject {
   font-weight: 700;
+}
+
+.email-preview.email-read .email-preview-subject {
+  font-weight: 100;
+
 }
 
 .email-extended {

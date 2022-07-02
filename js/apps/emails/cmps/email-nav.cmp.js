@@ -23,8 +23,9 @@ export default {
       this.$emit('clicked');
     },
     emitUpdateEmail(eventName) {
-      let email = this.email;
-      eventBus.emit(eventName, { email, eventName });
+      let email = this.email
+      email.isRead = false
+      eventBus.emit(eventName, { email });
       this.$emit('clicked');
       this.$emit('emailUnread');
     },

@@ -1,5 +1,6 @@
 import emailPreview from '../cmps/email-preview.cmp.js';
 import emailExtended from '../cmps/email-extended.cmp.js';
+import { emailService } from '../../../services/emails.service.js';
 
 export default {
   props: ['emails'],
@@ -9,7 +10,8 @@ export default {
             <email-preview
             :email="email" 
             :key="email.id"
-            @click.native="selectEmail(email.id, email.isRead)">
+            @click.native="selectEmail(email)"
+            :style="email.isRead ? isReadProperties : {}">
             </email-preview>
 
             <email-extended
@@ -27,15 +29,29 @@ export default {
     };
   },
   methods: {
-    selectEmail(emailId, isRead) {
-      if (this.selectedEmailId === emailId) {
+    selectEmail(email) {
+      console.log('email!!!', email)
+      
+      email.isRead = true
+      emailService.updateEmail(email)
+        .then(email => {
+          emailService.getEmails()
+            .then(emails => {
+              this.emailsToBeRead = emails
+              this.$emit('updated', emails)
+              console.log('success!, this.emailsToBeRead', this.emailsToBeRead);
+            })
+        })
+
+
+      if (this.selectedEmailId === email.id) {
         this.selectedEmailId = null;
         return;
       }
-      this.selectedEmailId = emailId;
+      this.selectedEmailId = email.id;
       // Filter by UNREAD? be 'read' only after the route change again
       if (this.$route.params.filter === '+unread') {
-        this.emailsToBeRead.push(emailId);
+        this.emailsToBeRead.push(email.id);
         return;
       }
       // Make the email read
@@ -66,4 +82,9 @@ export default {
     emailPreview,
     emailExtended,
   },
+  computed: {
+    isReadProperties() {
+      return 'background-color:#f1f3f4 ;font-weight: 100'
+    }
+  }
 };

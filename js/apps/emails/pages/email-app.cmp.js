@@ -43,9 +43,8 @@ export default {
       </transition>
           <email-list v-if ="emails"
           :emails="emailsToDisplay"
-          @updated="updateEmail">
-          
-          </email-list>
+          @updated="updateEmail"/>
+
         </div>    
 
             <button @click="composeEmail" class="mobile-compose">
@@ -105,7 +104,10 @@ export default {
     },
     updateEmail(email) {
       console.log('email', email);
-      emailService.updateEmail();
+      emailService.updateEmail()
+        .then(emails => {
+          this.emails = emails
+        })
     },
 
     replyToEmail(emailId) {
@@ -192,7 +194,6 @@ export default {
     //Listen to the eventBus
     eventBus.on('remove-email', this.removeEmail);
     eventBus.on('updated-email', this.updateEmail);
-
     eventBus.on('reply-email', this.replyToEmail);
     eventBus.on('toggle-starred', this.toggleStar);
   },
