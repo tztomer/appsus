@@ -30,11 +30,37 @@ ul.side-filter i {
 li.filter-item {
   cursor: pointer;
 }
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
 button.compose-btn {
   background: white;
   border: none;
   box-shadow: 0px 1px 7px #8080808c;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  transition: all 400ms ease-out;
+
+  padding: 8px;
+}
+button.compose-btn.expend {
+  width: 140px;
+  display: flex;
+  align-items: center;
+  color: #fbbd05;
+  font-size: 16px;
+  padding: 13px;
+  transition: all 400ms ease-out;
 }

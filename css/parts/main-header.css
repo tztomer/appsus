@@ -9,7 +9,18 @@
   z-index: 5;
   width: 100%;
 }
+.v-enter-active#menu,
+.v-leave-active#menu {
+  transition: all 0.5s ease;
+  transform: translateY(0px);
+}
 
+.v-enter-from#menu,
+.v-leave-to#menu {
+  opacity: 0;
+  transition: all 0.5s ease;
+  transform: translateY(-100%);
+}
 .main-nav {
   display: inline-grid;
   grid-template-columns: repeat(5, 1fr);

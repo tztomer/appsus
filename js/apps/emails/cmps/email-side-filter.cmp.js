@@ -36,7 +36,7 @@ export default {
             v-if="menuClass === 'side-menu-open'" class="close-filter-menu">
             <i class="fas fa-chevron-left"></i>
             </button>
-            <!-- <progress-bar :fillWidth="barWidth"></progress-bar> -->
+      
         </ul>
     </section>
     `,

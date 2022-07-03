@@ -13,7 +13,7 @@ export default {
             @click.native="selectEmail(email)">
             </email-preview>
 
-            <email-extended
+            <email-extended 
             @emailUnread="selectedEmailId = null"
             v-if="selectedEmailId === email.id"
             :email="email">
@@ -23,6 +23,7 @@ export default {
     `,
   data() {
     return {
+      active: false,
       selectedEmailId: null,
       emailsToBeRead: [],
     };

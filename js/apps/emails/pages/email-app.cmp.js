@@ -9,12 +9,17 @@ export default {
   name: 'email app',
   template: `
     <section class="email-app container" v-if="emails">
-        
-        <div class="search-bar-container">
-            <search-bar @filtered="setFilter" :searchData="searchData">
-            </search-bar>
+   
+    
+    
+    <div   class="search-bar-container">
+  
+
+
+      <search-bar :class="{ padd: isMenuOpen }"  @filtered="setFilter" :searchData="searchData">
+        </search-bar>
+ 
         </div>
-      
 
 
         <section class="main-content">
@@ -22,10 +27,11 @@ export default {
 
             <aside class="side-menu side-container">
                 <button @click.prevent="composeEmail"
-                class="compose-btn">
-                <img src="./img/logo/cop.png" alt="" srcset="">
+                class="compose-btn" :class="{expend : isCompose}">
+                <span><img src="./img/logo/cop.png" alt="" srcset=""></span>
+                <span v-if="isCompose">Compose</span>
                 </button>
-
+               
                 <email-side-filter @filtered="setSideFilter" 
                 :menuClass="menuClass"
                 @menuClosed="isMenuOpen = false"
@@ -33,10 +39,10 @@ export default {
                 :unreadCount="unreadCount">
                 </email-side-filter>
             </aside>
-
+           
         <div class="email-lists-wrapper">
 
-          <transition name="fade">
+          <transition name="slide-fade">
       <email-compose :isReply="isReply"
        @emailCreated="isCompose = false"
         v-if="isCompose"></email-compose>
