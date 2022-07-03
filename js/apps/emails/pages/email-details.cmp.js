@@ -1,6 +1,5 @@
 import { emailService } from '../../../services/emails.service.js';
 import emailMenu from '../cmps/email-nav.cmp.js';
-import { utilService } from '../../../services/util-service.js';
 
 export default {
   template: `

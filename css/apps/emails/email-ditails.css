@@ -1,0 +1,9 @@
+.email-header {
+  padding-top: 13vh;
+  height: 23vh;
+}
+
+section.email-details {
+  max-width: 600px;
+  margin: auto;
+}

@@ -23,7 +23,7 @@ export default {
             <i class="fas fa-ellipsis-h"></i>
             </button>
 
-            <router-link class="full-page-btn" :to="'email/'+email.id">
+            <router-link class="full-page-btn" :to="'/email/'+email.id">
             <i class="fas fa-expand"></i></router-link>
         </div>
     </div>
