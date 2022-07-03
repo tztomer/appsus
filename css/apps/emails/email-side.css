@@ -62,7 +62,7 @@ button.compose-btn.expend {
   color: #fbbd05;
   font-size: 16px;
   padding: 13px;
-  transition: all 400ms ease-out;
+  transition: all 200ms ease-out;
 }
 .compose-btn img {
   transition: all 700ms ease-out;

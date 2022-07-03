@@ -34,7 +34,7 @@ export default {
             <span class="email-address">{{emailAddress}}</span>
         </div>
         <div class="extended-body">
-      <h5>  {{email.body}}</h5>
+      <p>  {{email.body}}</p>
     </div>
 </section>
     `,

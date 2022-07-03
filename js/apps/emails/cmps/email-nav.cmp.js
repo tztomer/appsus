@@ -9,7 +9,7 @@ export default {
         <i class="menu-icon fas fa-reply"></i><span class="menu-item-txt">Reply</span></button>
         <button class="unread" 
         @click="updateEmail('updated-email')">
-        <i class="menu-icon fas fa-envelope"></i>Mark as unread</button>
+        <i class="menu-icon fas fa-envelope"></i>Unread</button>
 
         <button class="remove" @click="changeEmail('remove-email')">
          <i class="menu-icon fas fa-trash"></i>Remove</button>
