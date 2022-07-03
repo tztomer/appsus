@@ -1,0 +1,88 @@
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f2f2f2;
+  height: 57px;
+  padding: 0px 20px;
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+}
+
+.main-nav {
+  display: inline-grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+
+  background-color: whitesmoke;
+  z-index: 2;
+  padding: 15px;
+  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
+
+  width: 100%;
+  align-items: flex-start;
+  grid-gap: 3px;
+  justify-items: center;
+  align-items: center;
+
+  position: fixed;
+  top: 56px;
+}
+
+a.nav-link i {
+  background: #4284f4;
+  color: white;
+  border-radius: 100px;
+  width: 70px;
+  height: 70px;
+  font-size: 30px;
+  padding: 20px;
+}
+
+.menu-icon-container {
+  width: 71px;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+
+  box-sizing: border-box;
+}
+.menu-icon-container.fa-bars:before {
+  content: '\f0c9';
+  position: absolute;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+}
+.menu-icon-container:hover {
+  color: #d32e2a;
+}
+
+.menu-icon-container.active.fa-bars:before {
+  content: '\f00d';
+  color: #d32e2a;
+}
+/**/
+
+.menu-icon-container:hover .menu-bar.active {
+  animation: none;
+}
+
+.logo-img {
+  height: 39px;
+  width: 39px;
+  object-fit: contain;
+}
+img#menuIcon {
+  height: 30px;
+}
+.nav-link img {
+  height: 50px;
+  width: 50px;
+  margin-bottom: 3px;
+}

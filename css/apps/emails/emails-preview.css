@@ -1,0 +1,117 @@
+section.main-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+section.emails-container {
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+  overflow: hidden;
+}
+
+section.email-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  height: 100vh;
+  overflow: auto;
+  padding-bottom: 100px;
+}
+
+.email-previews {
+  min-height: 60px;
+  /* background: #f2f2f2; */
+  border-block-end: 1px solid #f2f2f2;
+  display: flex;
+  align-items: center;
+  position: relative;
+  /* padding: 0px 10px; */
+}
+.email-lists-wrapper {
+  width: 100%;
+}
+.email-preview .starred {
+  color: #f8cb4d;
+}
+
+section.email-preview {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 20px;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+  transition: all 100ms ease-out;
+  padding: 10px;
+}
+
+.email-previews:hover {
+  background: #f1f3f4;
+
+  transition: all 400ms ease-out;
+}
+
+.email-preview-content {
+  flex: 1;
+}
+
+span.email-preview-from {
+  min-width: 90px;
+  text-align: center;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  color: white;
+}
+span.email-preview-from {
+  min-width: 90px;
+}
+
+.email-preview-content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.email-preview-subject {
+  font-weight: 700;
+}
+
+/* .email-preview.email-read .email-preview-subject {
+  font-weight: 100;
+} */
+.email-read .email-preview-subject {
+  font-weight: 200;
+}
+section.email-preview.email-read {
+  background: #f1f3f4;
+  font-weight: 200;
+}
+
+section.email-preview.email-unread {
+  background-color: white;
+}
+
+.email-extended {
+  position: absolute;
+  z-index: 1;
+  background: #f8f8f8;
+  top: 61px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+button.star-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  max-width: 20px;
+  color: #4284f4;
+}

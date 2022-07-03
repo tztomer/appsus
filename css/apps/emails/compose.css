@@ -1,0 +1,47 @@
+.mobile-compose {
+  display: none;
+}
+
+.compose-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+form.compose-form {
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+  border: 1px solid #80808038;
+  margin-block-end: 30px;
+  box-shadow: 0px 0px 10px 2px #1a67d261;
+  border-radius: 6px;
+}
+
+.compose-form input,
+.compose-form textarea {
+  border: none;
+  background: #f1f3f4;
+  padding: 10px;
+  margin: 5px 0px;
+  border-radius: 6px;
+}
+
+.form-btns {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0px;
+  gap: 10px;
+  margin-block-start: 17px;
+}
+
+button.close-btn,
+button.delete-btn {
+  background: #ea4436;
+}
+form button.close-btn {
+  max-width: 41px;
+  font-size: 20px;
+  padding: 6px;
+}

@@ -1,0 +1,40 @@
+aside.side-menu.side-container {
+  flex-basis: 15%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-right: 10px;
+  border-right: 1px solid #bcbcbc47;
+}
+
+section.emails-side-filters {
+  height: 100vh;
+  width: 15vw;
+  cursor: pointer;
+}
+
+ul.side-filter {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  height: 266px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+ul.side-filter i {
+  padding-right: 10px;
+  color: #4285f4;
+}
+li.filter-item {
+  cursor: pointer;
+}
+button.compose-btn {
+  background: white;
+  border: none;
+  box-shadow: 0px 1px 7px #8080808c;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
