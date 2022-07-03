@@ -64,3 +64,10 @@ button.compose-btn.expend {
   padding: 13px;
   transition: all 400ms ease-out;
 }
+.compose-btn img {
+  transition: all 700ms ease-out;
+}
+.compose-btn img:hover {
+  transform: rotate(138deg);
+  transition: all 700ms ease-out;
+}
